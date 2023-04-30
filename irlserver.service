@@ -1,0 +1,16 @@
+[Unit]
+Description=Systemd service for irlserver
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/irlserver
+Environment=
+ExecStart=docker compose up -d
+ExecStop=docker compose stop
+StandardOutput=syslog
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
