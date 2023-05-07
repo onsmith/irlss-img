@@ -56,7 +56,7 @@ USER sls
 WORKDIR /home/sls
 
 # Copy the configuration file from the host
-COPY sls.conf .
+# COPY sls.conf .
 
 # The srt-receiver pushes the stream to this port
 # Downstream consumers pull the stream from this port

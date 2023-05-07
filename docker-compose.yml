@@ -6,12 +6,18 @@ services:
       # The source encoder pushes the stream to this port,
       # possibly across multiple physical connections
       - "49001:49001/udp"
+    logging:
+      driver: local
     depends_on:
       - srt-relay
 
   srt-relay:
     build: ./srt-relay
     restart: on-failure
+    volumes:
+      - ./srt-relay/sls.conf:/home/sls/sls.conf:ro
+    logging:
+      driver: local
     ports:
       # The srt receiver pushes the stream to this port
       # Downstream consumers pull the stream from this port
@@ -22,5 +28,9 @@ services:
   noalbs:
     build: ./noalbs
     restart: on-failure
+    volumes:
+      - ./noalbs/config.json:/home/noalbs/config.json:ro
+    logging:
+      driver: local
     depends_on:
       - srt-relay

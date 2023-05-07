@@ -18,14 +18,14 @@
     "switchingScenes": {
       "normal": "live",
       "low": "low",
-      "offline": "disconnected"
+      "offline": "offline"
     },
     "streamServers": [
       {
         "streamServer": {
           "type": "SrtLiveServer",
           "statsUrl": "http://srt-relay:8080/stats",
-          "publisher": "producer/encoder/REPLACE_WITH_STREAM_KEY"
+          "publisher": "encoder/producer/REPLACE_WITH_STREAM_KEY"
         },
         "name": "IRL Video Feed",
         "priority": 0,
