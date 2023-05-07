@@ -1,6 +1,7 @@
 services:
   srt-receiver:
     build: ./srt-receiver
+    restart: on-failure
     ports:
       # The source encoder pushes the stream to this port,
       # possibly across multiple physical connections
@@ -10,7 +11,16 @@ services:
 
   srt-relay:
     build: ./srt-relay
+    restart: on-failure
     ports:
       # The srt receiver pushes the stream to this port
       # Downstream consumers pull the stream from this port
       - "49002:49002/udp"
+      # NOALBS pulls stream stats from this port
+      - "8080:8080/tcp"
+
+  noalbs:
+    build: ./noalbs
+    restart: on-failure
+    depends_on:
+      - srt-relay

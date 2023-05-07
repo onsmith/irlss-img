@@ -62,6 +62,9 @@ COPY sls.conf .
 # Downstream consumers pull the stream from this port
 EXPOSE "49002:49002/udp"
 
+# NOALBS pulls stream stats from this port
+EXPOSE "8080/tcp"
+
 # Run sls
 # This will automatically pick up sls.conf since it's in the cwd
 ENTRYPOINT ["sls"]
