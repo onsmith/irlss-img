@@ -30,6 +30,9 @@ apt-get install -y obs-studio
 # Install gnome
 apt-get install -y ubuntu-desktop-minimal
 
+# Install nodejs and npm
+apt-get install -y  nodejs npm
+
 # Install the Remote Desktop Protocol (rdp) server
 apt-get install -y xrdp
 adduser xrdp ssl-cert
@@ -37,12 +40,13 @@ adduser xrdp ssl-cert
 # Build the irlserver docker images
 docker compose build
 
-# Register the irlserver service with systemd
-cp irlserver.service /etc/systemd/system/
+# Register the systemd services
+cp systemd/* /etc/systemd/system/
 systemctl daemon-reload
 
 # Start the services on boot
-systemctl enable irlserver
+systemctl enable irl-docker
+systemctl enable irl-webserver
 systemctl enable xrdp
 
 # Create unix user

@@ -1,5 +1,5 @@
 [Unit]
-Description=Systemd service for irlserver
+Description=SRT server docker containers
 Requires=docker.service
 After=docker.service
 

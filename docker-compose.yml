@@ -29,7 +29,8 @@ services:
     build: ./noalbs
     restart: on-failure
     volumes:
-      - ./noalbs/config.json:/home/noalbs/config.json:ro
+      - ./noalbs/config.json:/etc/noalbs/config.json:ro
+      - ./noalbs/.env:/etc/noalbs/.env:ro
     logging:
       driver: local
     depends_on:
