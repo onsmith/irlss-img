@@ -30,8 +30,9 @@ apt-get install -y obs-studio
 # Install gnome
 apt-get install -y ubuntu-desktop-minimal
 
-# Install nodejs and npm
-apt-get install -y  nodejs npm
+# Install nodejs 18 and npm
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+apt-get install nodejs
 
 # Install the Remote Desktop Protocol (rdp) server
 apt-get install -y xrdp
@@ -50,11 +51,11 @@ systemctl enable irl-webserver
 systemctl enable xrdp
 
 # Create unix user
-adduser $1
+adduser $1 --disabled-password --gecos ""
 adduser $1 sudo
 echo "$1:ubuntu" | chpasswd
 
-# Set up user's home directory
+# Install to user's home directory
 sudo -u $1 cp -r home /home/$1
 
 # Restart server
