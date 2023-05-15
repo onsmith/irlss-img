@@ -1,7 +1,7 @@
 #!/bin/bash
-# Install script for irlserver
+# Install script for irlss
 # To be run as root on a Ubuntu 22.04 system
-# Assumes the cwd is the root of the irlserver repo
+# Assumes the cwd is the root of the irlss repo
 # Pass the name of the user to create as the first argument
 
 # Configure bash
@@ -30,7 +30,7 @@ apt-get install -y obs-studio
 # Install gnome
 apt-get install -y ubuntu-desktop-minimal
 
-# Install nodejs 18 and npm
+# Install nodejs v18 and npm
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt-get install nodejs
 
@@ -38,16 +38,19 @@ apt-get install nodejs
 apt-get install -y xrdp
 adduser xrdp ssl-cert
 
-# Build the irlserver docker images
+# Build the irlss docker images
 docker compose build
+
+# Build the webserver
+cd webserver && npm install && npm run build && cd ..
 
 # Register the systemd services
 cp systemd/* /etc/systemd/system/
 systemctl daemon-reload
 
 # Start the services on boot
-systemctl enable irl-docker
-systemctl enable irl-webserver
+systemctl enable irlss-docker
+systemctl enable irlss-webserver
 systemctl enable xrdp
 
 # Create unix user
