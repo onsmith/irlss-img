@@ -5,7 +5,7 @@ After=docker.service
 
 [Service]
 Type=oneshot
-WorkingDirectory=/opt/irlserver
+WorkingDirectory=/opt/irlss
 Environment=
 ExecStart=docker compose up -d
 ExecStop=docker compose stop
