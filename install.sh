@@ -13,7 +13,7 @@ set -euox pipefail
 apt-get update -y
 
 # Install tools that will be used to install the applications below
-apt-get install -y \
+apt-get install -y -qq \
     software-properties-common \
     curl \
     apt-transport-https \
@@ -31,7 +31,7 @@ add-apt-repository ppa:obsproject/obs-studio
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
 # Install dependencies
-apt-get install -y \
+apt-get install -y -qq \
     docker-ce \
     obs-studio \
     ubuntu-desktop-minimal \
@@ -42,16 +42,13 @@ apt-get install -y \
 adduser xrdp ssl-cert
 
 # Build the irlss docker images
-(cd docker; docker compose build) &
-$docker_pid=$!
+(cd docker; docker compose build -q) &
 
 # Build the webserver
 (cd webserver; npm install && npm run build) &
-$webserver_pid=$!
 
 # Wait for the builds to finish
-wait $docker_pid
-wait $webserver_pid
+wait
 
 # Register the systemd services
 cp systemd/* /etc/systemd/system/
