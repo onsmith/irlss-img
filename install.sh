@@ -7,6 +7,8 @@
 # Configure bash
 set -euox pipefail
 
+# Early exit if the install path is non-empty
+
 # Update the package manager
 apt-get update -y
 
@@ -17,48 +19,55 @@ apt-get install -y \
     apt-transport-https \
     ca-certificates
 
-# Install docker
+# Configure package manager to install docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 apt-cache policy docker-ce
-apt-get install -y docker-ce
 
-# Install obs
+# Configure package manager to install obs
 add-apt-repository ppa:obsproject/obs-studio
-apt-get install -y obs-studio
 
-# Install gnome
-apt-get install -y ubuntu-desktop-minimal
-
-# Install nodejs v18 and npm
+# Configure package manager to install nodejs and npm
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-apt-get install nodejs
 
-# Install the Remote Desktop Protocol (rdp) server
-apt-get install -y xrdp
+# Install dependencies
+apt-get install -y \
+    docker-ce \
+    obs-studio \
+    ubuntu-desktop-minimal \
+    nodejs \
+    xrdp
+
+# The xrdp user needs to be in the ssl-cert group
 adduser xrdp ssl-cert
 
 # Build the irlss docker images
-docker compose build
+(cd docker; docker compose build) &
+$docker_pid=$!
 
 # Build the webserver
-cd webserver && npm install && npm run build && cd ..
+(cd webserver; npm install && npm run build) &
+$webserver_pid=$!
+
+# Wait for the builds to finish
+wait $docker_pid
+wait $webserver_pid
 
 # Register the systemd services
 cp systemd/* /etc/systemd/system/
 systemctl daemon-reload
 
 # Start the services on boot
+systemctl enable xrdp
 systemctl enable irlss-docker
 systemctl enable irlss-webserver
-systemctl enable xrdp
 
-# Create unix user
+# Create the unix user
 adduser $1 --disabled-password --gecos ""
 adduser $1 sudo
 echo "$1:ubuntu" | chpasswd
 
-# Install to user's home directory
+# Set up the user's home directory
 sudo -u $1 cp -r home /home/$1
 
 # Restart server

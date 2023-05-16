@@ -1,11 +1,11 @@
 [Unit]
-Description=SRT server docker containers
+Description=irlss docker services
 Requires=docker.service
 After=docker.service
 
 [Service]
 Type=oneshot
-WorkingDirectory=/opt/irlss
+WorkingDirectory=/opt/irlss/docker
 Environment=
 ExecStart=docker compose up -d
 ExecStop=docker compose stop

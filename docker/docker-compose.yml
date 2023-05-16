@@ -15,7 +15,7 @@ services:
     build: ./srt-relay
     restart: on-failure
     volumes:
-      - ./srt-relay/sls.conf:/home/sls/sls.conf:ro
+      - ../config/sls/sls.conf:/home/sls/sls.conf:ro
     logging:
       driver: local
     ports:
@@ -29,8 +29,8 @@ services:
     build: ./noalbs
     restart: on-failure
     volumes:
-      - ./config/noalbs/config.json:/home/noalbs/config.json:ro
-      - ./config/noalbs/.env:/home/noalbs/.env:ro
+      - ../config/noalbs/config.json:/home/noalbs/config.json:ro
+      - ../config/noalbs/.env:/home/noalbs/.env:ro
     logging:
       driver: local
     depends_on:
