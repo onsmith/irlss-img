@@ -1,0 +1,7 @@
+{
+  "extends": "next",
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "import/no-anonymous-default-export": "off"
+  }
+}
