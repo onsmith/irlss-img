@@ -25,7 +25,7 @@ RUN apt-get install -y libssl-dev
 COPY --from=build /app/target/release/noalbs /usr/local/bin/
 
 # Create a new unix user that will run the server
-RUN adduser noalbs
+RUN useradd --create-home --shell /bin/bash noalbs
 USER noalbs
 WORKDIR /home/noalbs
 

@@ -17,7 +17,8 @@ apt-get install -y -qq \
     software-properties-common \
     curl \
     apt-transport-https \
-    ca-certificates
+    ca-certificates \
+    sudo
 
 # Configure package manager to install docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -39,7 +40,7 @@ apt-get install -y -qq \
     xrdp
 
 # The xrdp user needs to be in the ssl-cert group
-adduser xrdp ssl-cert
+usermod -a -G ssl-cert xrdp
 
 # Build the irlss docker images
 (cd docker; docker compose build -q) &
@@ -60,8 +61,7 @@ systemctl enable irlss-docker
 systemctl enable irlss-webserver
 
 # Create the unix user
-adduser $1 --disabled-password --gecos ""
-adduser $1 sudo
+useradd --create-home --shell /bin/bash -G sudo $1
 echo "$1:ubuntu" | chpasswd
 
 # Set up the user's home directory

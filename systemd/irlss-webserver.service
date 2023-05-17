@@ -7,7 +7,7 @@ Type=simple
 Restart=on-failure
 RestartSec=10
 WorkingDirectory=/opt/irlss/webserver
-ExecStart=npm run start -p 80
+ExecStart=npm run start -- -p 80
 
 [Install]
 WantedBy=multi-user.target
