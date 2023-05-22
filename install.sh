@@ -5,7 +5,7 @@
 # Pass the name of the user to create as the first argument
 
 # Configure bash
-set -euox pipefail
+set -euo pipefail
 
 # Early exit if the install path is non-empty
 
@@ -65,7 +65,7 @@ useradd --create-home --shell /bin/bash -G sudo $1
 echo "$1:ubuntu" | chpasswd
 
 # Set up the user's home directory
-sudo -u $1 cp -r home /home/$1
+sudo -u $1 cp -r home/. /home/$1
 
 # Restart server
 reboot

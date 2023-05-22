@@ -8,7 +8,7 @@ Type=oneshot
 WorkingDirectory=/opt/irlss/docker
 Environment=
 ExecStart=docker compose up -d
-ExecStop=docker compose stop
+ExecStop=docker compose down
 StandardOutput=syslog
 RemainAfterExit=yes
 
