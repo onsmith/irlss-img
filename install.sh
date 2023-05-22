@@ -43,13 +43,10 @@ apt-get install -y -qq \
 usermod -a -G ssl-cert xrdp
 
 # Build the irlss docker images
-(cd docker; docker compose build -q) &
+(cd docker; docker compose build -q)
 
 # Build the webserver
-(cd webserver; npm install && npm run build) &
-
-# Wait for the builds to finish
-wait
+(cd webserver; npm install && npm run build)
 
 # Register the systemd services
 cp systemd/* /etc/systemd/system/
