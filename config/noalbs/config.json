@@ -25,7 +25,7 @@
         "streamServer": {
           "type": "SrtLiveServer",
           "statsUrl": "http://srt-relay:8080/stats",
-          "publisher": "publisher/stream/REPLACE_WITH_INGEST_KEY"
+          "publisher": "publisher/stream/PASTE_INGEST_KEY"
         },
         "name": "IRL Video Feed",
         "priority": 0,
@@ -43,7 +43,7 @@
   },
   "chat": {
     "platform": "Twitch",
-    "username": "REPLACE_WITH_TWITCH_USERNAME",
+    "username": "PASTE_TWITCH_USERNAME",
     "admins": [],
     "prefix": "!",
     "enablePublicCommands": false,
