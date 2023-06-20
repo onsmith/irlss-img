@@ -62,7 +62,7 @@ useradd --create-home --shell /bin/bash -G sudo $1
 echo "$1:ubuntu" | chpasswd
 
 # Set up the user's home directory
-sudo -u $1 cp -r home/. /home/$1
+# sudo -u $1 cp -r home/. /home/$1
 
 # Restart server
 reboot
