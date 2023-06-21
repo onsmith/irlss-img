@@ -35,3 +35,5 @@ services:
       driver: local
     depends_on:
       - srt-relay
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
