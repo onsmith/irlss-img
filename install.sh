@@ -18,7 +18,8 @@ apt-get install -y -qq \
     curl \
     apt-transport-https \
     ca-certificates \
-    sudo
+    sudo \
+    build-essential
 
 # Configure package manager to install docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
@@ -30,6 +31,14 @@ add-apt-repository ppa:obsproject/obs-studio
 
 # Configure package manager to install nodejs and npm
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+
+# Install ffmpeg with srt library enabled
+# Use installer script from https://github.com/markus-perl/ffmpeg-build-script
+(
+    cd /tmp && \
+    AUTOINSTALL=yes \
+    bash <(curl -s "https://raw.githubusercontent.com/markus-perl/ffmpeg-build-script/master/web-install-gpl-and-non-free.sh?v1")
+)
 
 # Install dependencies
 apt-get install -y -qq \
