@@ -54,7 +54,7 @@ USER srtla
 WORKDIR /home/srtla
 
 # Belabox (the upstream producer) pushes the stream to this port
-EXPOSE "49001:49001/udp"
+EXPOSE 49001/udp
 
 # Run srtla_rec
 # first positional argument  - the upstream listening port

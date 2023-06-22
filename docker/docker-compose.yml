@@ -20,10 +20,11 @@ services:
       driver: local
     ports:
       # The srt receiver pushes the stream to this port
-      # Downstream consumers pull the stream from this port
-      - "49002:49002/udp"
+      # OBS pulls the stream from this port
+      - "49002:49002"
+    expose:
       # NOALBS pulls stream stats from this port
-      - "8080:8080/tcp"
+      - "8080"
 
   noalbs:
     build: ./noalbs

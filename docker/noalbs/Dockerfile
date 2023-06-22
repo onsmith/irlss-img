@@ -29,8 +29,5 @@ RUN useradd --create-home --shell /bin/bash noalbs
 USER noalbs
 WORKDIR /home/noalbs
 
-# Copy config
-# COPY config.json .
-
 # Entrypoint -- run noalbs
 ENTRYPOINT ["noalbs"]

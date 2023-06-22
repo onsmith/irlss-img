@@ -55,16 +55,13 @@ RUN adduser -D sls
 USER sls
 WORKDIR /home/sls
 
-# Copy the configuration file from the host
-# COPY sls.conf .
-
 # The srt-receiver pushes the stream to this port
 # Downstream consumers pull the stream from this port
-EXPOSE "49002:49002/udp"
+EXPOSE 49002/udp
 
 # NOALBS pulls stream stats from this port
-EXPOSE "8080/tcp"
+EXPOSE 8080/tcp
 
 # Run sls
-# This will automatically pick up sls.conf since it's in the cwd
+# This will automatically pick up sls.conf if it's in the cwd
 ENTRYPOINT ["sls"]
