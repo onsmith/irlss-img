@@ -7,8 +7,6 @@
 # Configure bash
 set -euo pipefail
 
-# Early exit if the install path is non-empty
-
 # Update the package manager
 apt-get update -y
 
@@ -21,26 +19,21 @@ apt-get install -y -qq \
     sudo \
     build-essential
 
-# Configure package manager to install docker
+# Configure apt package manager to install docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 apt-cache policy docker-ce
 
-# Configure package manager to install obs
+# Configure apt package manager to install obs
 add-apt-repository ppa:obsproject/obs-studio
 
 # Configure package manager to install nodejs and npm
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
 # Install ffmpeg with srt library enabled
-# Use installer script from https://github.com/markus-perl/ffmpeg-build-script
-(
-    cd /tmp && \
-    AUTOINSTALL=yes \
-    bash <(curl -s "https://raw.githubusercontent.com/markus-perl/ffmpeg-build-script/master/web-install-gpl-and-non-free.sh?v1")
-)
+./install-ffmpeg.sh
 
-# Install dependencies
+# Install irlss dependencies
 apt-get install -y -qq \
     docker-ce \
     obs-studio \
