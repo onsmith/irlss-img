@@ -31,7 +31,7 @@ apt-cache policy docker-ce
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
 # Install ffmpeg with srt library enabled
-./install-ffmpeg.sh
+# ./install-ffmpeg.sh
 
 # Install irlss dependencies
 apt-get install -y -qq \
