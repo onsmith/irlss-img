@@ -25,7 +25,7 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu fo
 apt-cache policy docker-ce
 
 # Configure apt package manager to install obs
-add-apt-repository ppa:obsproject/obs-studio
+# add-apt-repository ppa:obsproject/obs-studio
 
 # Configure package manager to install nodejs and npm
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
@@ -36,7 +36,6 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 # Install irlss dependencies
 apt-get install -y -qq \
     docker-ce \
-    obs-studio \
     ubuntu-desktop-minimal \
     nodejs \
     xrdp
