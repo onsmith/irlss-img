@@ -21,7 +21,7 @@ services:
     ports:
       # The srt receiver pushes the stream to this port
       # OBS pulls the stream from this port
-      - "49002:49002"
+      - "49002:49002/udp"
     expose:
       # NOALBS pulls stream stats from this port
       - "8080"
