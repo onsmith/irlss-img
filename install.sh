@@ -25,17 +25,16 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu fo
 apt-cache policy docker-ce
 
 # Configure apt package manager to install obs
-# add-apt-repository ppa:obsproject/obs-studio
+add-apt-repository ppa:obsproject/obs-studio
 
 # Configure package manager to install nodejs and npm
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
-# Install ffmpeg with srt library enabled
-# ./install-ffmpeg.sh
-
 # Install irlss dependencies
 apt-get install -y -qq \
     docker-ce \
+    ffmpeg \
+    obs-studio \
     ubuntu-desktop-minimal \
     nodejs \
     xrdp
@@ -60,7 +59,7 @@ systemctl enable irlss-webserver
 
 # Create the unix user
 useradd --create-home --shell /bin/bash -G sudo $1
-echo "$1:ubuntu" | chpasswd
+echo "$1:userpass" | chpasswd
 
 # Set up the user's home directory
 # sudo -u $1 cp -r home/. /home/$1
